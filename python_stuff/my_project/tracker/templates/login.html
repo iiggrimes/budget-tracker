@@ -3,14 +3,14 @@
 {% extends "tracker/base.html" %}
 
 {% block title %}
-Register - Budget Tracker
+Login - Budget Tracker
 {% endblock %}
 
 {% block content %}
-<h1>Register</h1>
+<h1>Login</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Login</button>
 </form>
 {% endblock %}
