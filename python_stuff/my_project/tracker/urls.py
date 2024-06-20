@@ -1,7 +1,9 @@
-from django.urls import path
-from . import views
 from django.contrib.auth import views as auth_views
-from .views import register, budget_list, budget_create, budget_delete
+from django.urls import path
+
+from . import views
+from .views import budget_list, budget_create, budget_delete
+
 ##problem, why is register grey
 
 
