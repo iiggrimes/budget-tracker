@@ -3,11 +3,15 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm
 from .models import Budget
 from .forms import BudgetForm
 
+def custom_logout_view(request):
+    logout(request)
+    return redirect('login')
 @login_required
 def budget_list(request):
     budgets = Budget.objects.filter(user=request.user)
@@ -33,12 +37,14 @@ def budget_delete(request, pk):
         budget.delete()
         return redirect('budget_list')
     return render(request, 'tracker/budget_confirm_delete.html', {'budget': budget})
-
+@login_required
+def home(request):
+    return render(request, 'tracker/home.html')
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
@@ -50,6 +56,3 @@ def register(request):
         form = RegisterForm()
     return render(request, 'tracker/register.html', {'form': form})
 
-@login_required
-def home(request):
-    return render(request, 'tracker/home.html')
