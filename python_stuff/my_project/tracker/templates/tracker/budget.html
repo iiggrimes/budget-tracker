@@ -1,0 +1,30 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}
+Budget - Budget Tracker
+{% endblock %}
+
+{% block content %}
+<h1>Your Budget</h1>
+{% if budget %}
+    <p>Current budget: ${{ budget.amount }}</p>
+{% else %}
+    <p>No budget set.</p>
+{% endif %}
+
+<h2>Set/Update Budget</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save Budget</button>
+</form>
+
+<h2>Expenses</h2>
+<p>Total expenses: ${{ total_expenses }}</p>
+<ul>
+    {% for expense in expenses %}
+        <li>{{ expense.name }} - ${{ expense.amount }} ({{ expense.category }}) on {{ expense.date }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_expense' %}">Add Expense</a>
+{% endblock %}

@@ -1,12 +1,22 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Budget
+from .models import Budget, Expense
 
 class BudgetForm(forms.ModelForm):
     class Meta:
         model = Budget
-        fields = ['name', 'amount']
+        fields = ['amount']
+
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ['name', 'amount', 'category']
+
+#class BudgetForm(forms.ModelForm):
+#    class Meta:
+#       model = Budget
+#        fields = ['name', 'amount']
 
 #class RegisterForm(UserCreationForm):
 #    email = forms.EmailField()
