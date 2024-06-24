@@ -94,10 +94,8 @@ def add_expense_view(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         if form.is_valid():
-            expense = form.save(commit=False)
-            expense.user = request.user
-            expense.save()
-            return redirect('budget')
+            form.save()
+            return redirect('home')
     else:
         form = ExpenseForm()
 

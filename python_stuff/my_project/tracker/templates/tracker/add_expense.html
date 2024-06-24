@@ -10,7 +10,11 @@ Add Expense - Budget Tracker
     <form method="post" action="{% url 'add_expense' %}">
         {% csrf_token %}
         <label for="category">Category:</label>
-        <input type="text" id="category" name="category" required>
+        <select id="category" name="category">
+            {% for choice in form.category.field.choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+        </select>
 
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" required>

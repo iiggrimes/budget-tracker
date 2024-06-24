@@ -9,6 +9,19 @@ class BudgetForm(forms.ModelForm):
         fields = ['amount']
 
 class ExpenseForm(forms.ModelForm):
+    CATEGORY_CHOICES = [
+        ('Food', 'Food'),
+        ('Transportation', 'Transportation'),
+        ('Entertainment', 'Entertainment'),
+        ('Accommodation', 'Accommodation'),
+        ('Amenities', 'Amenities'),
+        ('Healthcare', 'Healthcare'),
+        ('Investments', 'Investments'),
+        ('Travel', 'Travel'),
+        ('Other', 'Other'),
+    ]
+
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES)
     class Meta:
         model = Expense
         fields = ['name', 'amount', 'category']
